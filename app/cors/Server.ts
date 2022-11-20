@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import DB from "../cors/DB";
+import apiRouter from "../../routes/api";
 
 dotenv.config();
 
@@ -24,15 +25,7 @@ export default class Server {
   }
 
   private routes(): void {
-    this.app.get("/", async (req: Request, res: Response) => {
-      try {
-        const db = DB.connection();
-        await db.authenticate();
-        return res.send("change value");
-      } catch (error) {
-        return res.send(error);
-      }
-    });
+    this.app.use("/api", apiRouter);
   }
 
   public start(): void {
