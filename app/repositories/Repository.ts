@@ -19,7 +19,7 @@ export default abstract class Repository<M extends Model>
     this.model = model;
   }
 
-  public async findAll(options: FindOptions): Promise<M[]> {
+  public async findAll(options: FindOptions = {}): Promise<M[]> {
     return this.model.findAll(options);
   }
   public async findByPk(identifier: Identifier): Promise<M | null> {
@@ -37,7 +37,7 @@ export default abstract class Repository<M extends Model>
   }
 
   public findAndCountAll(
-    options: Omit<FindAndCountOptions<Attributes<M>>, "group">
+    options: Omit<FindAndCountOptions<Attributes<M>>, "group"> = {}
   ): Promise<{ count: number; rows: M[] }> {
     return this.model.findAndCountAll(options);
   }
