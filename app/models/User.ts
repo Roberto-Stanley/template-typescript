@@ -13,6 +13,7 @@ export default class User extends Model<
 > {
   declare id: CreationOptional<number>;
   declare email: string;
+  declare password: string;
   declare created_at: Date;
   declare updated_at: Date;
   declare deleted_at: Date;
@@ -30,10 +31,14 @@ User.init(
       unique: true,
       allowNull: false,
     },
-
-    created_at:DataTypes.DATE|,
-    updated_at:DataTypes.DATE|,
-    deleted_at:DataTypes.DATE|,
+    password: {
+      type: DataTypes.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    updated_at: DataTypes.DATE,
+    deleted_at: DataTypes.DATE,
+    created_at: DataTypes.DATE,
   },
   {
     sequelize: DB.connection(),
